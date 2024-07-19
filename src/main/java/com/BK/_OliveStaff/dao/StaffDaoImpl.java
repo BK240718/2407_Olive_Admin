@@ -12,19 +12,19 @@ public class StaffDaoImpl implements StaffDao{
     private final SqlSession session;
 
     @Override
-    public int totStaff() {
+    public int totalStaff() {
 
-        int totStaffCnt = 0;
+        int totalStaffCnt = 0;
         System.out.println("StaffDaoImpl Start");
 
         try {
-            
-            totStaffCnt = session.selectOne("staffTotal");
-            System.out.println("totStaffCnt = " + totStaffCnt);
+
+            totalStaffCnt = session.selectOne("staffTotal");
+            System.out.println("totStaffCnt = " + totalStaffCnt);
         } catch (Exception e) {
             System.out.println("StaffDaoImpl Exception = " + e.getMessage());
         }
 
-        return totStaffCnt;
+        return totalStaffCnt;
     }
 }

@@ -14,14 +14,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Slf4j
 public class StaffController {
 
-    private final StaffService ss;
+    private final StaffService staffService;
 
     @RequestMapping(value = "listStaff")
     public String staffList(Staff staff, @RequestParam(value = "currentPage", required = false) String currentPage, Model model) {
         System.out.println("StaffController Start");
 
         // Staff 전체 cnt
-        int totalStaff = ss.totalStaff();
+        int totalStaff = staffService.totalStaff();
 
         model.addAttribute("totalStaff", totalStaff);
 
