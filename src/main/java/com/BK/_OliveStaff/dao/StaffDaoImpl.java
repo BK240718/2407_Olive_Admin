@@ -15,7 +15,7 @@ public class StaffDaoImpl implements StaffDao{
     public int totalStaff() {
 
         int totalStaffCnt = 0;
-        System.out.println("StaffDaoImpl Start");
+        System.out.println("StaffDaoImpl totalStaff Start");
 
         try {
 

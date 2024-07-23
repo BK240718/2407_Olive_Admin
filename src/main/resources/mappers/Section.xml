@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.BK._OliveStaff.SectionMapper">
+
+
+    <select id="sectionTotal" resultType="int">
+        select Count(*) FROM section
+    </select>
+
+
+    <select id="sectionListAll" parameterType="Section" resultType="Section">
+        Select *
+        FROM
+        (
+                SELECT rownum rn, a.*
+                FROM
+                            (select * from section order by sectionId desc) a
+        )
+        WHERE rn BETWEEN #{start} and #{end}
+    </select>
+
+
+    <select id="sectionSelectOne" parameterType="int" resultType="Section">
+        Select *
+        FROM section
+        WHERE sectionId = #{sectionId}
+    </select>
+
+
+    <update id="sectionUpdate" parameterType="section">
+        update section
+        set secName = #{secName}
+        where sectionId = #{sectionId}
+    </update>
+
+
+    <insert id="sectionWrite" parameterType="section">
+        insert INTO section (sectionID, secName)
+        VALUES (sectionID_seq.NEXTVAL, #{secName})
+    </insert>
+</mapper>

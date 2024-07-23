@@ -5,6 +5,8 @@
 
 <configuration>
     <typeAliases>
-        <typeAlias alias="Staff" type="com.BK._OliveStaff.model.Staff"/>
+        <typeAlias alias="Staff" type="com.BK._OliveStaff.dto.Staff"/>
+        <typeAlias alias="Section" type="com.BK._OliveStaff.dto.Section"/>
+
     </typeAliases>
 </configuration>
