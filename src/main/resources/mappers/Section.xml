@@ -40,4 +40,15 @@
         insert INTO section (sectionID, secName)
         VALUES (sectionID_seq.NEXTVAL, #{secName})
     </insert>
+
+
+    <select id="mainSection" resultType="section">
+        Select *
+        FROM (
+                Select *
+                From section
+                ORDER by sectionId desc
+                )
+        Where rownum &lt;= 5
+    </select>
 </mapper>

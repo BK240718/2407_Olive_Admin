@@ -15,4 +15,6 @@ public interface SectionDao {
     int updateSection(Section section);
 
     int insertSection(Section section);
+
+    List<Section> mainSection();
 }

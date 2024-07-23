@@ -16,10 +16,7 @@ public class StaffController {
 
     private final StaffService staffService;
 
-    @RequestMapping(value = "/")
-    public String home() {
-        return "list";
-    }
+
 
     @RequestMapping(value = "listStaff")
     public String staffList(Staff staff, @RequestParam(value = "currentPage", required = false) String currentPage, Model model) {

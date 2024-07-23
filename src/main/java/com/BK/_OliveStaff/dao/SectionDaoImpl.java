@@ -93,5 +93,19 @@ public class SectionDaoImpl implements SectionDao {
         return insertCount;
     }
 
+    @Override
+    public List<Section> mainSection() {
+        System.out.println("SectionDaoImpl mainSection Start");
+        List<Section> sectionMain = null;
+
+        try {
+            sectionMain = session.selectList("mainSection");
+            System.out.println("SectionDaoImpl mainSection Exception: "+sectionMain.size());
+        } catch (Exception e) {
+            System.out.println("SectionDaoImpl mainSection Exception: "+e.getMessage());
+        }
+        return sectionMain;
+    }
+
 
 }

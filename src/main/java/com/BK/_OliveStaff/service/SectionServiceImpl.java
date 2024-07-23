@@ -30,7 +30,7 @@ public class SectionServiceImpl implements SectionService {
 
         List<Section> sectionList = null;
         sectionList = sectionDao.listSection(section);
-        System.out.println("listSection.size()"+sectionList.size());
+        System.out.println("sectionList.size()"+sectionList.size());
 
         return sectionList;
     }
@@ -67,6 +67,18 @@ public class SectionServiceImpl implements SectionService {
         insertCount = sectionDao.insertSection(section);
 
         return insertCount;
+    }
+
+    @Override
+    public List<Section> mainSection() {
+
+        System.out.println("SectionServiceImpl mainSection Start");
+
+        List<Section> sectionList = null;
+        sectionList = sectionDao.mainSection();
+        System.out.println("sectionList.size()"+sectionList.size());
+
+        return sectionList;
     }
 
 
