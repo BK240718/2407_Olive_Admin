@@ -51,4 +51,11 @@
                 )
         Where rownum &lt;= 5
     </select>
+
+
+    <delete id="deleteSection" parameterType="section">
+        delete
+        from section
+        where sectionId = #{sectionId}
+    </delete>
 </mapper>

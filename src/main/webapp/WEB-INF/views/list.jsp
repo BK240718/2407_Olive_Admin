@@ -56,6 +56,10 @@
                     dataType:"json",    // 받는 형식
                     type:"POST",        // HTTP 요청 방식
                     success:function(response) {
+
+                        console.log("Status: 200 OK");
+                        console.log("Server response:", JSON.stringify(response, null, 2));
+
                         var sectionList = response.sectionList;
                         $('#sectionTableBody').empty(); // 기존 테이블 행 제거
 

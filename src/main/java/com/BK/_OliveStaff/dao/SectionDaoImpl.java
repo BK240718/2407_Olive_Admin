@@ -107,5 +107,21 @@ public class SectionDaoImpl implements SectionDao {
         return sectionMain;
     }
 
+    @Override
+    public int deleteSection(int sectionId) {
+
+        System.out.println("SectionDaoImpl deleteSection Start");
+
+        int deleteCount = 0;
+
+        try {
+            deleteCount = session.delete("deleteSection",sectionId);
+
+        } catch (Exception e) {
+            System.out.println("SectionDaoImpl deleteSection e.getMessage() = " + e.getMessage());
+        }
+        return deleteCount;
+    }
+
 
 }

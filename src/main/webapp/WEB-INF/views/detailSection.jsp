@@ -19,13 +19,13 @@
                          <div class="d-md-flex justify-content-between align-items-center">
                             <!-- page header -->
                             <div>
-                               <h2>Add New Category</h2>
+                               <h2>Detail Category</h2>
                                <!-- breacrumb -->
                                <nav aria-label="breadcrumb">
                                   <ol class="breadcrumb mb-0">
                                      <li class="breadcrumb-item"><a href="#" class="text-inherit">Dashboard</a></li>
                                      <li class="breadcrumb-item"><a href="#" class="text-inherit">Categories</a></li>
-                                     <li class="breadcrumb-item active" aria-current="page">Edit Category</li>
+                                     <li class="breadcrumb-item active" aria-current="page">Detail Category</li>
                                   </ol>
                                </nav>
                             </div>
@@ -43,27 +43,23 @@
                             <div class="card-body p-6">
 
 
-                               <h4 class="mb-4 h5 mt-5">Category Information</h4>
+                               <h2 class="mb-0">Category ID: ${section.sectionId}</h2>
 
-                               <form action="updateSection" method="post">
-                                   <input type="hidden" name="sectionId" value="${section.sectionId}">
-                                   <div class="row">
-                                      <!-- input -->
-                                      <div class="mb-3 col-lg-6">
-                                         <label class="form-label">Section ID</label>
-                                         <input type="text" class="form-control" value="${section.sectionId}" required />
-                                      </div>
-                                      <!-- input -->
-                                      <div class="mb-3 col-lg-6">
-                                         <label class="form-label">카테고리명</label>
-                                         <input type="text" class="form-control" value="${section.secName}" required />
-                                      </div>
+                               <div class="mt-8">
+                                 <div class="row">
+                                    <!-- address -->
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                       <div class="mb-6">
+                                          <h6>Category Name</h6>
+                                          <p class="mb-1 lh-lg">
+                                             ${section.secName}
+                                          </p>
 
-                                      <div class="col-lg-12">
-                                         <button type="submit" class="btn btn-primary mb-2">Edit Category</button>
-                                      </div>
-                                   </div>
-                               </form>
+                                       </div>
+                                    </div>
+
+                                 </div>
+                              </div>
                             </div>
                          </div>
                       </div>

@@ -17,4 +17,6 @@ public interface SectionDao {
     int insertSection(Section section);
 
     List<Section> mainSection();
+
+    int deleteSection(int sectionId);
 }

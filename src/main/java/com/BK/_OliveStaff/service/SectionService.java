@@ -16,4 +16,6 @@ public interface SectionService {
     int insertSection(Section section);
 
     List<Section> mainSection();
+
+    int deleteSection(int sectionId);
 }
