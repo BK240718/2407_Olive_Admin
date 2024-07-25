@@ -1,10 +1,10 @@
-package com.BK._OliveStaff.dao;
+package com.BK._OliveStaff.service;
 
 import com.BK._OliveStaff.dto.ItemDTL;
 
 import java.util.List;
 
-public interface ItemDTLDao {
+public interface ItemDTLService {
 
     List<ItemDTL> listItemDTL(ItemDTL itemDTL);
 

@@ -4,8 +4,33 @@
 
 <mapper namespace="com.BK._OliveStaff.ItemDTLMapper">
     <select id="itemDTLListAll" parameterType="itemDTL" resultType="itemDTL">
-        select idtl.*, i.itemname
-        from itemdtl idtl
-        JOIN item i ON idtl.itemtid = i.itemtid
+        Select *
+        From
+                (Select rownum rn, a.*
+                From
+                        (select  iDTL.*, i.itemName, sf.staffName, st.secName
+                        From    Item i, itemDTL iDTL, staff sf, section st
+                        Where   i.itemID = iDTL.itemID
+                        And     iDTL.staffID = sf.staffID
+                        And     i.sectionId = st.sectionId
+                        order by iDTL.itemDTLId desc
+                        ) a
+                )
+        Where   rn Between #{start} and #{end}
+    </select>
+
+    <select id="itemDTLTotal" resultType="int">
+        Select  Count(*)
+        From    ItemDTL
+    </select>
+
+
+    <select id="itemDTLSelectOne" parameterType="int" resultType="ItemDTL">
+        select  iDTL.*, i.itemName, sf.staffName, st.secName
+        From    Item i, itemDTL iDTL, staff sf, section st
+        Where   iDTL.itemDtlId = #{itemDtlId}
+        And     i.itemID = iDTL.itemID
+        And     iDTL.staffID = sf.staffID
+        And     i.sectionId = st.sectionId
     </select>
 </mapper>

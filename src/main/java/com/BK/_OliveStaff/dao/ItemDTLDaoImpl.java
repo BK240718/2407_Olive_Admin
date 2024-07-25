@@ -14,14 +14,13 @@ public class ItemDTLDaoImpl implements ItemDTLDao{
     private final SqlSession session;
 
     @Override
-    public List<ItemDTL> listItemDTL() {
+    public List<ItemDTL> listItemDTL(ItemDTL itemDTL) {
 
         System.out.println("ItemDTLDaoImpl listItemDTL Start");
-
         List<ItemDTL> itemDTLList = null;
 
         try {
-            itemDTLList = session.selectList("itemDTLListAll");
+            itemDTLList = session.selectList("itemDTLListAll", itemDTL);
             
         } catch (Exception e) {
             System.out.println("ItemDTLDaoImpl listItemDTL e.getMessage() = " + e.getMessage());
@@ -29,4 +28,38 @@ public class ItemDTLDaoImpl implements ItemDTLDao{
         
         return itemDTLList;
     }
+
+
+    @Override
+    public int totalItemDTL() {
+
+        System.out.println("ItemDTLDaoImpl totalItemDTL Start");
+        int totalItemDTLCnt = 0;
+
+        try {
+            totalItemDTLCnt = session.selectOne("itemDTLTotal");
+            System.out.println("totalItemDTLCnt = " + totalItemDTLCnt);
+        } catch (Exception e) {
+            System.out.println("ItemDTLDaoImpl totalItemDTL e.getMessage() = " + e.getMessage());
+        }
+
+        return totalItemDTLCnt;
+    }
+
+
+    @Override
+    public ItemDTL detailItemDTL(int itemDtlId) {
+
+        System.out.println("ItemDTLDaoImpl detailItemDTL Start");
+        ItemDTL itemDTL = new ItemDTL();
+
+        try {
+            itemDTL = session.selectOne("itemDTLSelectOne", itemDtlId);
+        } catch (Exception e) {
+            System.out.println("ItemDTLDaoImpl detailItemDTL e.getMessage() = " + e.getMessage());
+        }
+        return itemDTL;
+    }
+
+
 }

@@ -22,7 +22,9 @@ public class SectionController {
     private final SectionService sectionService;
 
     @RequestMapping(value = "listSection")
-    public String sectionList(Section section, @RequestParam(value = "currentPage", required = false) String currentPage, Model model) {
+    public String sectionList(Section section,
+                              @RequestParam(value = "currentPage", required = false) String currentPage,
+                              Model model) {
 
         System.out.println("SectionController listSection Start");
 
@@ -45,12 +47,13 @@ public class SectionController {
         model.addAttribute("page",page);
 
 
-        return "categories";
+        return "section/categories";
     }
 
 
     @GetMapping(value = "detailSection")
-    public String detailSection(@RequestParam("sectionId") int sectionId, Model model) {
+    public String detailSection(@RequestParam("sectionId") int sectionId,
+                                Model model) {
 
         System.out.println("SectionController detailSection Start");
         System.out.println("sectionId = " + sectionId);
@@ -59,7 +62,7 @@ public class SectionController {
 
         model.addAttribute("section", section);
 
-        return "detailSection";
+        return "section/detailSection";
     }
 
 
@@ -73,7 +76,7 @@ public class SectionController {
 
         model.addAttribute("section", section);
 
-        return "updateFormSection";
+        return "section/updateFormSection";
     }
 
 
@@ -95,7 +98,7 @@ public class SectionController {
     public String writeFormSection(Model model) {
         System.out.println("SectionController writeFormSection Start");
 
-        return "writeFormSection";
+        return "section/writeFormSection";
     }
 
 

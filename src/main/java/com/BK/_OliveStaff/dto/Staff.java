@@ -6,6 +6,6 @@ import lombok.Data;
 public class Staff {
     private int staffID;
     private String profileImg;
-    private String name;
+    private String staffName;
     private String password;
 }

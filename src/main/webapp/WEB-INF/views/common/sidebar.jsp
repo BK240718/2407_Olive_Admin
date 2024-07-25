@@ -204,7 +204,7 @@
 					<span class="nav-label">Store Managements</span>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link " href="../dashboard/products.html">
+					<a class="nav-link " href="/listItemDTL">
 						<div class="d-flex align-items-center">
 							<span class="nav-link-icon"><i class="bi bi-cart"></i></span>
 							<span class="nav-link-text">Products</span>
@@ -494,7 +494,7 @@
 					<span class="nav-label">Store Managements</span>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link " href="../dashboard/products.html">
+					<a class="nav-link " href="/listItemDTL">
 						<div class="d-flex align-items-center">
 							<span class="nav-link-icon"><i class="bi bi-cart"></i></span>
 							<span class="nav-link-text">Products</span>
