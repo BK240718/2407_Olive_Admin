@@ -123,5 +123,22 @@ public class SectionDaoImpl implements SectionDao {
         return deleteCount;
     }
 
+    @Override
+    public List<Section> getSection() {
+
+        System.out.println("SectionDaoImpl getSection Start");
+
+        List<Section> getSection = null;
+
+        try {
+            getSection = session.selectList("getSection");
+            System.out.println("getSection.size() = " + getSection.size());
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+
+        return getSection;
+    }
+
 
 }

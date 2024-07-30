@@ -19,4 +19,6 @@ public interface SectionDao {
     List<Section> mainSection();
 
     int deleteSection(int sectionId);
+
+    List<Section> getSection();
 }

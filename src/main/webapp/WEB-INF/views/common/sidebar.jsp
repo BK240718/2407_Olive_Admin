@@ -220,31 +220,14 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a
-						class="nav-link  collapsed "
-						href="#"
-						data-bs-toggle="collapse"
-						data-bs-target="#navCategoriesOrders"
-						aria-expanded="false"
-						aria-controls="navCategoriesOrders"
-					>
+					<a class="nav-link " href="/listInvoice">
 						<div class="d-flex align-items-center">
 							<span class="nav-link-icon"><i class="bi bi-bag"></i></span>
 							<span class="nav-link-text">Orders</span>
 						</div>
 					</a>
-					<div id="navCategoriesOrders" class="collapse " data-bs-parent="#sideNavbar">
-						<ul class="nav flex-column">
-							<li class="nav-item">
-								<a class="nav-link " href="../dashboard/order-list.html">List</a>
-							</li>
-							<!-- Nav item -->
-							<li class="nav-item">
-								<a class="nav-link " href="../dashboard/order-single.html">Single</a>
-							</li>
-						</ul>
-					</div>
 				</li>
+
 
 				<li class="nav-item">
 					<a class="nav-link " href="../dashboard/vendor-grid.html">
@@ -510,24 +493,13 @@
 					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link  collapsed " href="#" data-bs-toggle="collapse" data-bs-target="#navOrders" aria-expanded="false" aria-controls="navOrders">
-						<div class="d-flex align-items-center">
-							<span class="nav-link-icon"><i class="bi bi-bag"></i></span>
-							<span class="nav-link-text">Orders</span>
-						</div>
-					</a>
-					<div id="navOrders" class="collapse " data-bs-parent="#sideNavbar">
-						<ul class="nav flex-column">
-							<li class="nav-item">
-								<a class="nav-link " href="../dashboard/order-list.html">List</a>
-							</li>
-							<!-- Nav item -->
-							<li class="nav-item">
-								<a class="nav-link " href="../dashboard/order-single.html">Single</a>
-							</li>
-						</ul>
-					</div>
-				</li>
+                    <a class="nav-link " href="/listInvoice">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon"><i class="bi bi-bag"></i></span>
+                            <span class="nav-link-text">Orders</span>
+                        </div>
+                    </a>
+                </li>
 				<li class="nav-item">
 					<a class="nav-link " href="../dashboard/vendor-grid.html">
 						<div class="d-flex align-items-center">

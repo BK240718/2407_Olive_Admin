@@ -67,7 +67,8 @@ public class SectionController {
 
 
     @GetMapping(value = "updateFormSection")
-    public String updateFormSection(@RequestParam("sectionId") int sectionId, Model model) {
+    public String updateFormSection(@RequestParam("sectionId") int sectionId,
+                                    Model model) {
 
         System.out.println("SectionController updateFormSection Start");
         System.out.println("sectionId = " + sectionId);

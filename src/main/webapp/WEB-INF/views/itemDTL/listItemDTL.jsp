@@ -30,7 +30,7 @@
                    </div>
                    <!-- button -->
                    <div>
-                      <a href="add-product.html" class="btn btn-primary">Add Product</a>
+                      <a href="writeFormItemDTL" class="btn btn-primary">Add Product</a>
                    </div>
                 </div>
              </div>
@@ -114,7 +114,7 @@
                                                   </a>
                                                </li>
                                                <li>
-                                                  <a class="dropdown-item" href="#">
+                                                  <a class="dropdown-item" href="updateFormItemDTL?itemDtlId=${section.itemDtlId}">
                                                      <i class="bi bi-pencil-square me-3"></i>
                                                      Edit
                                                   </a>

@@ -156,7 +156,7 @@
                                                        </tr>
                                                        <tr>
                                                           <td>등록일:</td>
-                                                          <td>${itemDTL.regDate}</td>
+                                                          <td><fmt:formatDate value="${itemDTL.regDateAsDate}" pattern="yyyy-MM-dd"/></td>
                                                        </tr>
 
 

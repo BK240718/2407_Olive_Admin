@@ -15,6 +15,15 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+  # aws
+  profiles:
+    include: aws
+
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+
 # Mybatis
 mybatis:
   config-location: classpath:configuration.xml

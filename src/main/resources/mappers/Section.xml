@@ -58,4 +58,9 @@
         from section
         where sectionId = #{sectionId}
     </delete>
+
+    <select id="getSection" resultType="section">
+        Select  *
+        From    section
+    </select>
 </mapper>

@@ -6,4 +6,9 @@
     <select id="staffTotal" resultType="int">
         select Count(*) FROM staff
     </select>
+
+    <select id="getIdNameStaff" resultType="staff">
+        Select  staffId, staffName
+        From    staff
+    </select>
 </mapper>

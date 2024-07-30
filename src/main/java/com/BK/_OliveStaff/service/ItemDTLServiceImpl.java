@@ -49,4 +49,17 @@ public class ItemDTLServiceImpl implements ItemDTLService {
 
         return itemDTL;
     }
+
+    @Override
+    public int insertItemDTL(ItemDTL itemDTL) {
+
+        System.out.println("ItemDTLServiceImpl detailItemDTL Start");
+        int insertResult = 0;
+
+        insertResult = itemDTLDao.insertItemDTL(itemDTL);
+
+        return insertResult;
+    }
+
+
 }

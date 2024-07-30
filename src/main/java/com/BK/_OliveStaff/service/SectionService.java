@@ -18,4 +18,6 @@ public interface SectionService {
     List<Section> mainSection();
 
     int deleteSection(int sectionId);
+
+    List<Section> getSection();
 }

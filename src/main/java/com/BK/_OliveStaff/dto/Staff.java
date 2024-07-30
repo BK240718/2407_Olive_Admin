@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Staff {
-    private int staffID;
+    private int staffId;
     private String profileImg;
     private String staffName;
     private String password;

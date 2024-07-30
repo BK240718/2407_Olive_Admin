@@ -8,5 +8,7 @@
         <typeAlias alias="Staff" type="com.BK._OliveStaff.dto.Staff"/>
         <typeAlias alias="Section" type="com.BK._OliveStaff.dto.Section"/>
         <typeAlias alias="ItemDTL" type="com.BK._OliveStaff.dto.ItemDTL"/>
+        <typeAlias alias="Invoice" type="com.BK._OliveStaff.dto.Invoice"/>
+        <typeAlias alias="Item" type="com.BK._OliveStaff.dto.Item"/>
     </typeAliases>
 </configuration>

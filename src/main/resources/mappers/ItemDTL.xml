@@ -33,4 +33,24 @@
         And     iDTL.staffID = sf.staffID
         And     i.sectionId = st.sectionId
     </select>
+
+
+    <insert id="insertItemDTL" parameterType="itemDTL">
+        INSERT INTO ItemDTL VALUES (
+        ITEMDTLID_SEQ.NEXTVAL,
+        #{yearMonth},
+        #{initialFinal},
+        #{itemId},
+        #{staffId},
+        #{colorName},
+        #{purchasePrice},
+        #{salesPrice},
+        #{quantity},
+        SYSDATE,
+        #{status},
+        #{thumbnail},
+        #{detailImg},
+        #{colorImg}
+        )
+    </insert>
 </mapper>

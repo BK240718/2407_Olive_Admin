@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.BK._OliveStaff.InvoiceMapper">
+    <select id="invoiceListAll" parameterType="invoice" resultType="invoice">
+        Select *
+        From
+                (Select rownum rn, a.*
+                From
+                        (select  i.*, c.customerName
+                        From    Invoice i, Customer c
+                        Where   i.customerId = c.customerId
+                        order by i.invoiceId desc
+                        ) a
+                )
+        Where   rn Between #{start} and #{end}
+    </select>
+
+    <select id="invoiceTotal" resultType="int">
+        Select  Count(*)
+        From    Invoice
+    </select>
+
+</mapper>

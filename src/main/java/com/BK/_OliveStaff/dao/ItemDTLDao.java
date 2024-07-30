@@ -11,4 +11,6 @@ public interface ItemDTLDao {
     int totalItemDTL();
 
     ItemDTL detailItemDTL(int itemDtlId);
+
+    int insertItemDTL(ItemDTL itemDTL);
 }

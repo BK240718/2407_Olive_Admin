@@ -61,5 +61,21 @@ public class ItemDTLDaoImpl implements ItemDTLDao{
         return itemDTL;
     }
 
+    @Override
+    public int insertItemDTL(ItemDTL itemDTL) {
+
+        System.out.println("ItemDTLDaoImpl insertItemDTL Start");
+        int insertResult = 0;
+
+        try {
+            insertResult = session.insert("insertItemDTL",itemDTL);
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return insertResult;
+    }
+
 
 }

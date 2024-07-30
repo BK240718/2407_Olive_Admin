@@ -2,6 +2,10 @@ package com.BK._OliveStaff.dto;
 
 import lombok.Data;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Data
 public class ItemDTL {
     private int itemDtlId;
@@ -10,11 +14,11 @@ public class ItemDTL {
     private int itemId;
     private int staffId;
     private String colorName;
-    private Integer purchasePrice;
-    private Integer salesPrice;
-    private Integer quantity;
+    private int purchasePrice;
+    private int salesPrice;
+    private int quantity;
     private String regDate;
-    private Integer status;
+    private int status;
     private String thumbnail;
     private String detailImg;
     private String colorImg;
@@ -32,5 +36,16 @@ public class ItemDTL {
     // 기초기말 변환 메서드 추가
     public String getInitialFinalType() {
         return initialFinal == 0 ? "기초" : (initialFinal == 1 ? "기말" : "알수없음");
+    }
+    
+    // String regDate 문자열을 Date 객체로 변환
+    public Date getRegDateAsDate() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return sdf.parse(regDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
