@@ -114,7 +114,7 @@
                                                   </a>
                                                </li>
                                                <li>
-                                                  <a class="dropdown-item" href="updateFormItemDTL?itemDtlId=${section.itemDtlId}">
+                                                  <a class="dropdown-item" href="updateFormItemDTL?itemDtlId=${itemDTL.itemDtlId}">
                                                      <i class="bi bi-pencil-square me-3"></i>
                                                      Edit
                                                   </a>

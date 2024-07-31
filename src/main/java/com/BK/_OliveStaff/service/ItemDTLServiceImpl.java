@@ -61,5 +61,28 @@ public class ItemDTLServiceImpl implements ItemDTLService {
         return insertResult;
     }
 
+    @Override
+    public int updateItemDTL(ItemDTL itemDTL) {
+
+        System.out.println("ItemDTLServiceImpl updateItemDTL Start");
+        int updateResult = 0;
+
+        updateResult = itemDTLDao.updateItemDTL(itemDTL);
+
+        return updateResult;
+    }
+
+    @Override
+    public int deleteItemDTL(int itemDtlId) {
+
+        System.out.println("ItemDTLServiceImpl deleteItemDTL Start");
+
+        int deleteResult = 0;
+
+        deleteResult = itemDTLDao.deleteItemDTL(itemDtlId);
+
+        return deleteResult;
+    }
+
 
 }

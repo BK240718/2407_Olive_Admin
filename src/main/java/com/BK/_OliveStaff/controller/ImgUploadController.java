@@ -24,8 +24,11 @@ public class ImgUploadController {
     public String upload(@RequestParam("img") MultipartFile img,
                          Model model) {
 
+        System.out.println("ImgUploadService upload Start");
+
         // 이미지 업로드
         String imgUrl = imgUploadService.upload(img);
+        System.out.println("imgUrl = " + imgUrl);
 
         // View에게 전달할 데이터를 Model에 담음
         model.addAttribute("imgUrl", imgUrl);

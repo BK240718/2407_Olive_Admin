@@ -70,8 +70,8 @@ public class ItemDTLController {
         List<String> detailImgList = new ArrayList<>();
         String detailImgJson = itemDTL.getDetailImg();
 
-        // ObjectMapper 클래스: JSON 문자열 -> Java 객체로 
-        // TypeReference: JSON 문자열 -> List<String>으로
+        // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
+        // TypeReference:         JSON 문자열 -> List<String>으로
         try {
             ObjectMapper mapper = new ObjectMapper();
             detailImgList = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
@@ -86,16 +86,127 @@ public class ItemDTLController {
     }
 
 
-    @GetMapping(value = "updateFormItemDTL")
+    @RequestMapping(value = "updateFormItemDTL")
     public String updateFormItemDTL(@RequestParam("itemDtlId") int itemDtlId,
                                     Model model) {
+
         System.out.println("ItemDTLController detailItemDTL Start");
+        Section section  = null;
+        Staff staff = null;
+
+        List<Section> getSection = sectionService.getSection();
+        List<Staff> getIdNameStaff = staffService.getIdNameStaff();
+        List<Item> getItem = itemService.getItem(itemDtlId);
 
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
+        // JSON 문자열을 List로 변환
+        List<String> detailImgList = new ArrayList<>();
+        String detailImgJson = itemDTL.getDetailImg();
+
+        // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
+        // TypeReference:         JSON 문자열 -> List<String>으로
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            detailImgList = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         model.addAttribute("itemDTL",itemDTL);
+        model.addAttribute("getSection", getSection);
+        model.addAttribute("getIdNameStaff", getIdNameStaff);
+        model.addAttribute("getItem", getItem);
+        model.addAttribute("detailImgList",detailImgList);
+
         return "itemDTL/updateFormItemDTL";
     }
+
+
+    @PostMapping(value = "updateItemDTL")
+    public String updateItemDTL(@ModelAttribute ItemDTL itemDTL,
+                                @RequestParam(value = "thumbnailFile", required = false) MultipartFile thumbnailFile,
+                                @RequestParam(value = "detailImgFile", required = false) MultipartFile[] detailImgsFile,
+                                @RequestParam(value = "colorImgFile", required = false) MultipartFile colorImgFile,
+                                Model model) {
+
+        System.out.println("ItemDTLController updateItemDTL Start");
+        System.out.println("itemDTL.getItemDtlId() = " + itemDTL.getItemDtlId());
+        System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
+
+        // 1. 이미지 업로드
+        String thumbnailUrl;
+        if (thumbnailFile != null && !thumbnailFile.isEmpty()) {
+            thumbnailUrl = imgUploadService.upload(thumbnailFile);
+        } else {
+            thumbnailUrl = itemDTL.getThumbnail();
+        }
+
+        List<String> detailImgUrls = new ArrayList<>();
+        if (detailImgsFile != null && detailImgsFile.length > 0) {
+            for (MultipartFile detailImg : detailImgsFile) {
+                detailImgUrls.add(imgUploadService.upload(detailImg));
+            }
+        } else {
+            detailImgUrls.addAll(parseDetailImgUrls(itemDTL.getDetailImg()));
+        }
+
+        String colorImgUrl;
+        if (colorImgFile != null && !colorImgFile.isEmpty()) {
+            colorImgUrl = imgUploadService.upload(colorImgFile);
+        } else {
+            colorImgUrl = itemDTL.getColorImg();
+        }
+
+        // 2. detailImgUrls 리스트를 JSON 배열 형식으로 변환
+        String detailImgUrlsJson;
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            detailImgUrlsJson = mapper.writeValueAsString(detailImgUrls);
+            System.out.println("detailImgUrlsJson = " + detailImgUrlsJson);
+        } catch (Exception e) {
+            e.printStackTrace();
+            detailImgUrlsJson = "[]";
+        }
+
+        // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
+        itemDTL.setThumbnail(thumbnailUrl);
+        itemDTL.setDetailImg(detailImgUrlsJson);    // JSON 배열 형식으로 저장
+        itemDTL.setColorImg(colorImgUrl);
+
+        System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
+        System.out.println("itemDTL.getDetailImg() = " + itemDTL.getDetailImg());
+        System.out.println("itemDTL.getColorImg() = " + itemDTL.getColorImg());
+        System.out.println("itemDTL.getItemDtlId() = " + itemDTL.getItemDtlId());
+
+        model.addAttribute("itemDtlId",itemDTL.getItemDtlId());
+
+        // 4. ItemDTL Update 작업
+        int updateResult = itemDTLService.updateItemDTL(itemDTL);
+
+        if (updateResult > 0) return "redirect:listItemDTL";
+        else {
+            model.addAttribute("msg","입력 실패");
+            return "forward:updateFormItemDTL";
+        }
+
+    }
+
+    private List<String> parseDetailImgUrls(String detailImgJson) {
+        List<String> detailImgUrls = new ArrayList<>();
+        if(detailImgJson != null && !detailImgJson.isEmpty()) {
+            try {
+                // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
+                // TypeReference:         JSON 문자열 -> List<String>으로
+                ObjectMapper mapper = new ObjectMapper();
+                detailImgUrls = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return detailImgUrls;
+    }
+
 
 
     @RequestMapping(value = "writeFormItemDTL")
@@ -116,7 +227,7 @@ public class ItemDTLController {
 
 
     @ResponseBody
-    @RequestMapping(value = "getItem", method = RequestMethod.GET)
+    @RequestMapping(value = "getItemAjax", method = RequestMethod.GET)
     public Map<String, Object> getItem(@RequestParam("sectionId") int sectionId) {
 
         System.out.println("ItemDTLController getItem Start");
@@ -138,9 +249,6 @@ public class ItemDTLController {
                                Model model) {
 
         System.out.println("ItemDTLController writeItemDTL Start");
-
-        // 1.
-        System.out.println("itemDTL.getStatus() = " + itemDTL.getStatus());
 
         // 1. 이미지 업로드
         String thumbnailUrl = imgUploadService.upload(thumbnailFile);
@@ -170,6 +278,7 @@ public class ItemDTLController {
         System.out.println("itemDTL.getDetailImg() = " + itemDTL.getDetailImg());
         System.out.println("itemDTL.getColorImg() = " + itemDTL.getColorImg());
 
+        // 4. ItemDTL Insert 작업
         int insertResult = itemDTLService.insertItemDTL(itemDTL);
         if (insertResult > 0) return "redirect:listItemDTL";
         else {
@@ -178,6 +287,8 @@ public class ItemDTLController {
         }
 
     }
+
+
 
 
 

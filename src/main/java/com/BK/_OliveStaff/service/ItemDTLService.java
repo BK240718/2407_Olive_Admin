@@ -13,4 +13,8 @@ public interface ItemDTLService {
     ItemDTL detailItemDTL(int itemDtlId);
 
     int insertItemDTL(ItemDTL itemDTL);
+
+    int updateItemDTL(ItemDTL itemDTL);
+
+    int deleteItemDTL(int itemDtlId);
 }

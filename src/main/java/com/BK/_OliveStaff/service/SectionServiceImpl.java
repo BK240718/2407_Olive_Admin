@@ -86,11 +86,11 @@ public class SectionServiceImpl implements SectionService {
 
         System.out.println("SectionServiceImpl deleteSection Start");
 
-        int deleteCount = 0;
+        int deleteResult = 0;
 
-        deleteCount = sectionDao.deleteSection(sectionId);
+        deleteResult = sectionDao.deleteSection(sectionId);
 
-        return deleteCount;
+        return deleteResult;
     }
 
     @Override

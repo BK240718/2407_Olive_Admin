@@ -24,9 +24,10 @@ public class ItemDTL {
     private String colorImg;
 
     // 추가 필드
-    private String staffName;  // sf.name
-    private String secName; // st.secName
-    private String itemName; // i.itemName
+    private String staffName;   // sf.name
+    private String secName;     // st.secName
+    private String itemName;    // i.itemName
+    private int sectionId;      // st.sectionId
 
     // 조회용
     private String search;      private String keyword;

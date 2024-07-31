@@ -77,5 +77,36 @@ public class ItemDTLDaoImpl implements ItemDTLDao{
         return insertResult;
     }
 
+    @Override
+    public int updateItemDTL(ItemDTL itemDTL) {
+
+        System.out.println("ItemDTLDaoImpl updateItemDTL Start");
+        int updateResult = 0;
+
+        try {
+            updateResult = session.update("updateItemDTL", itemDTL);
+            System.out.println("ItemDTLDaoImpl insertItemDTL updateResult = " + updateResult);
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+
+        return updateResult;
+    }
+
+    @Override
+    public int deleteItemDTL(int itemDtlId) {
+
+        System.out.println("ItemDTLDaoImpl deleteItemDTL Start");
+
+        int deleteResult = 0;
+        
+        try {
+            deleteResult = session.delete("deleteItemDTL",itemDtlId);
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+        return deleteResult;
+    }
+
 
 }

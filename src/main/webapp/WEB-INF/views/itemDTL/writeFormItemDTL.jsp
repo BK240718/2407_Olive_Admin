@@ -93,8 +93,6 @@
                                                         </select>
                                                         <button type="button" class="btn btn-soft-primary ms-2" onclick="addItemForm()">Add</button>
                                                     </div>
-
-
                                                   </div>
                                                 </div>
                                                 <div class="row mb-3">
@@ -216,7 +214,7 @@
 
         if (sectionId) {
             $.ajax({
-                url:'getItem',
+                url:'getItemAjax',
                 type:'GET',
                 data: {sectionId:sectionId},
                 dataType:'json',

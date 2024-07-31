@@ -26,7 +26,7 @@
 
 
     <select id="itemDTLSelectOne" parameterType="int" resultType="ItemDTL">
-        select  iDTL.*, i.itemName, sf.staffName, st.secName
+        select  iDTL.*, i.itemName, sf.staffName, st.secName, st.sectionId
         From    Item i, itemDTL iDTL, staff sf, section st
         Where   iDTL.itemDtlId = #{itemDtlId}
         And     i.itemID = iDTL.itemID
@@ -53,4 +53,28 @@
         #{colorImg}
         )
     </insert>
+
+    <update id="updateItemDTL" parameterType="ItemDTL">
+        UPDATE ItemDTL
+        SET
+        yearMonth = #{yearMonth},
+        initialFinal = #{initialFinal},
+        itemId = #{itemId},
+        staffId = #{staffId},
+        colorName = #{colorName},
+        purchasePrice = #{purchasePrice},
+        salesPrice = #{salesPrice},
+        quantity = #{quantity},
+        STATUS = #{status},
+        thumbnail = #{thumbnail},
+        detailImg = #{detailImg},
+        colorImg = #{colorImg}
+        WHERE itemDtlId = #{itemDtlId}
+    </update>
+
+    <delete id="deleteItemDTL" parameterType="itemDTL">
+        delete
+        from ItemDTL
+        Where itemDtlId = #{itemDtlId}
+    </delete>
 </mapper>
