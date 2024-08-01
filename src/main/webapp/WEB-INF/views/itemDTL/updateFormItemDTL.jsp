@@ -15,12 +15,12 @@
       					<div class="row mb-8">
       						<div class="col-md-12">
       							<div>
-      								<h2>Create Item Detail</h2>
+      								<h2>Edit Item Detail</h2>
       								<!-- breacrumb -->
       								<nav aria-label="breadcrumb">
       									<ol class="breadcrumb mb-0">
       										<li class="breadcrumb-item"><a href="#" class="text-inherit">Dashboard</a></li>
-      										<li class="breadcrumb-item active" aria-current="page">Create</li>
+      										<li class="breadcrumb-item active" aria-current="page">Edit</li>
       									</ol>
       								</nav>
       							</div>
@@ -183,7 +183,7 @@
                                                 <div>
                                                     <div class="col-12 mt-3">
                                                         <div class="d-flex flex-column flex-md-row gap-2">
-                                                            <button class="btn btn-primary" type="submit">Create New Item Detail</button>
+                                                            <button class="btn btn-primary" type="submit">Edit New Item Detail</button>
                                                             <button class="btn btn-secondary" type="submit">Cancel</button>
                                                         </div>
                                                     </div>

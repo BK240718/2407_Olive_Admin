@@ -120,7 +120,8 @@ public class SectionController {
 
 
     @RequestMapping(value = "deleteSection")
-    public String deleteSection(@RequestParam("sectionId") int sectionId, Model model) {
+    public String deleteSection(@RequestParam("sectionId") int sectionId,
+                                Model model) {
 
         System.out.println("SectionController deleteSection Start");
 

@@ -108,7 +108,7 @@
                                             </a>
                                             <ul class="dropdown-menu">
                                                <li>
-                                                  <a class="dropdown-item" href="#">
+                                                  <a class="dropdown-item" href="deleteItemDTL?itemDtlId=${itemDTL.itemDtlId}">
                                                      <i class="bi bi-trash me-3"></i>
                                                      Delete
                                                   </a>

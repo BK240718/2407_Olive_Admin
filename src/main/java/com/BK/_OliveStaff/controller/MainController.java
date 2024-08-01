@@ -23,7 +23,8 @@ public class MainController {
     // for main 페이지
     @RequestMapping(value = "/")
     public String home() {
-        return "list";
+        //return "list";
+        return "common/login";
     }
 
 

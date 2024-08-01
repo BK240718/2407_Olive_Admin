@@ -134,7 +134,9 @@ public class ItemDTLController {
         System.out.println("itemDTL.getItemDtlId() = " + itemDTL.getItemDtlId());
         System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
 
-        // 1. 이미지 업로드
+        // 1-1. 파일 Update 유무 확인
+        // 1-2. 있으면 S3 업로드 하고 or 없으면 기존 url 정보 가져와서
+        // 1-3. Url 객체 생성
         String thumbnailUrl;
         if (thumbnailFile != null && !thumbnailFile.isEmpty()) {
             thumbnailUrl = imgUploadService.upload(thumbnailFile);
@@ -289,6 +291,16 @@ public class ItemDTLController {
     }
 
 
+    
+    @RequestMapping(value = "deleteItemDTL")
+    public String deleteItemDTL(@RequestParam("itemDtlId") int itemDtlId,
+                                Model model) {
+        System.out.println("ItemDTLController deleteItemDTL Start");
+
+        int deleteResult = itemDTLService.deleteItemDTL(itemDtlId);
+
+        return "redirect:listItemDTL";
+    }
 
 
 

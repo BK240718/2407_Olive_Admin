@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -51,5 +53,40 @@ public class ImgUploadServiceImpl implements ImgUploadService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
 
         return originFileName + "_" + LocalDateTime.now().format(formatter);
+    }
+
+
+    @Override
+    public boolean deteleImg(String url) {
+
+        System.out.println("ImgUploadServiceImpl deteleImg Start");
+
+        if (url != null && !url.isEmpty()) {
+            // String fileName = url;
+            String fileName = extractFileNameFromUrl(url);
+            System.out.println("fileName = " + fileName);
+            System.out.println("bucket = " + bucket);
+            try {
+                s3Client.deleteObject(bucket, fileName);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private String extractFileNameFromUrl(String url) {
+
+        // URL에서 파일명 추출
+        String encodedFileName = url.substring(url.lastIndexOf('/')+1);
+        try {
+            // 파일명 디코딩
+            return URLDecoder.decode(encodedFileName, StandardCharsets.UTF_8.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
