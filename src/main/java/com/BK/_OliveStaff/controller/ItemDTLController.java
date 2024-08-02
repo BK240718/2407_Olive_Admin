@@ -302,8 +302,4 @@ public class ItemDTLController {
         return "redirect:listItemDTL";
     }
 
-
-
-
-
 }

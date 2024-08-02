@@ -11,4 +11,11 @@
         Select  staffId, staffName
         From    staff
     </select>
+
+    <select id="selectStaffByLogin" parameterType="staff" resultType="staff">
+        select  *
+        From    Staff
+        Where   staffId = #{staffId}
+        And     staffPw = #{staffPw}
+    </select>
 </mapper>

@@ -8,4 +8,6 @@ public interface StaffService {
         int totalStaff();
 
         List<Staff> getIdNameStaff();
+
+        Staff selectStaffByLogin(Staff staffIdPw);
 }

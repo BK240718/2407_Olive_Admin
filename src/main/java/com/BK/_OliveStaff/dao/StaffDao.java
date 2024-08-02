@@ -9,4 +9,6 @@ public interface StaffDao {
     int totalStaff();
 
     List<Staff> getIdNameStaff();
+
+    Staff selectStaffByLogin(Staff staffIdPw);
 }

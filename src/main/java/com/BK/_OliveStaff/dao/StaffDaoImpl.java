@@ -49,4 +49,21 @@ public class StaffDaoImpl implements StaffDao{
         
         return getIdNameStaff;
     }
+
+    @Override
+    public Staff selectStaffByLogin(Staff staffIdPw) {
+
+        System.out.println("StaffDaoImpl selectStaffByLogin Start");
+
+        Staff staff = null;
+        
+        try {
+            staff = session.selectOne("selectStaffByLogin", staffIdPw);
+            System.out.println("staff = " + staff.getStaffId());
+        } catch (Exception e) {
+            System.out.println("e.getMessage() = " + e.getMessage());
+        }
+
+        return staff;
+    }
 }

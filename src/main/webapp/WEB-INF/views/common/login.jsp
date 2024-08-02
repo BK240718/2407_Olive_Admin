@@ -48,17 +48,16 @@
                   <div class="col-12 col-md-6 offset-lg-1 col-lg-4 order-lg-2 order-1">
                      <div class="mb-lg-9 mb-5">
                         <h1 class="mb-1 h2 fw-bold">Sign in to FreshCart</h1>
-                        <p>Welcome back to FreshCart! Enter your email to get started.</p>
                      </div>
 
-                     <form class="needs-validation" novalidate>
+                     <form class="needs-validation" action="login" novalidate>
                         <div class="row g-3">
                            <!-- row -->
 
                            <div class="col-12">
                               <!-- input -->
                               <label for="formSigninEmail" class="form-label visually-hidden">Email address</label>
-                              <input type="email" class="form-control" id="formSigninEmail" placeholder="Email" required />
+                              <input type="number" class="form-control" name="staffId" id="formSigninEmail" placeholder="ID" required />
                               <div class="invalid-feedback">Please enter name.</div>
                            </div>
                            <div class="col-12">
@@ -66,7 +65,7 @@
                               <div class="password-field position-relative">
                                  <label for="formSigninPassword" class="form-label visually-hidden">Password</label>
                                  <div class="password-field position-relative">
-                                    <input type="password" class="form-control fakePassword" id="formSigninPassword" placeholder="*****" required />
+                                    <input type="password" class="form-control fakePassword" name="staffPw" id="formSigninPassword" placeholder="*****" required />
                                     <span><i class="bi bi-eye-slash passwordToggler"></i></span>
                                     <div class="invalid-feedback">Please enter password.</div>
                                  </div>
@@ -86,11 +85,6 @@
                            </div>
                            <!-- btn -->
                            <div class="col-12 d-grid"><button type="submit" class="btn btn-primary">Sign In</button></div>
-                           <!-- link -->
-                           <div>
-                              Don’t have an account?
-                              <a href="../pages/signup.html">Sign Up</a>
-                           </div>
                         </div>
                      </form>
                   </div>

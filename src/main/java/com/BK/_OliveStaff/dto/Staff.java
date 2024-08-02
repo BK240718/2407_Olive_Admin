@@ -7,5 +7,5 @@ public class Staff {
     private int staffId;
     private String profileImg;
     private String staffName;
-    private String password;
+    private String staffPw;
 }

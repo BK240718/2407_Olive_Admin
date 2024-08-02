@@ -33,4 +33,14 @@ public class StaffServiceImpl implements StaffService{
         System.out.println("getIdNameStaff.size() = " + getIdNameStaff.size());
         return getIdNameStaff;
     }
+
+    @Override
+    public Staff selectStaffByLogin(Staff staffIdPw) {
+
+        System.out.println("StaffServiceImpl selectStaffByLogin Start");
+
+        Staff staff = staffDao.selectStaffByLogin(staffIdPw);
+
+        return staff;
+    }
 }
