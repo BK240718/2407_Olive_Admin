@@ -140,7 +140,7 @@
                                                        </tr>
                                                        <tr>
                                                           <td>Quantity:</td>
-                                                          <td>${itemDTL.quantity}</td>
+                                                          <td>${itemDTL.itemDtlQty}</td>
                                                        </tr>
                                                        <tr>
                                                           <td>YearMonth:</td>

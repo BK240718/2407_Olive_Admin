@@ -5,8 +5,6 @@ import com.BK._OliveStaff.dto.ItemDTL;
 import com.BK._OliveStaff.dto.Section;
 import com.BK._OliveStaff.dto.Staff;
 import com.BK._OliveStaff.service.*;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -21,11 +19,12 @@ import java.util.*;
 @Slf4j
 public class ItemDTLController {
 
-    private final ItemDTLService itemDTLService;
-    private final SectionService sectionService;
-    private final StaffService staffService;
-    private final ItemService itemService;
-    private final ImgUploadService imgUploadService;
+    private final ItemDTLService    itemDTLService;
+    private final SectionService    sectionService;
+    private final StaffService      staffService;
+    private final ItemService       itemService;
+    private final ImgUploadService  imgUploadService;
+
 
     @RequestMapping(value = "listItemDTL")
     public String listItemDTL(ItemDTL itemDTL,
@@ -43,6 +42,7 @@ public class ItemDTLController {
         itemDTL.setStart(page.getStart());  // 시작 시 1
         itemDTL.setEnd(page.getEnd());      // 시작 시 10
 
+        // 3. Select List
         List<ItemDTL> listItemDTL = itemDTLService.listItemDTL(itemDTL);
         System.out.println("ItemDTLController listItemDTL listItemDTL.size() = " + listItemDTL.size());
 
@@ -62,22 +62,9 @@ public class ItemDTLController {
 
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
-        // itemDTL의 detailImg를 List로 변환
-        /* String[] detailImgArray = itemDTL.getDetailImg().split(",");
-        List<String> detailImgList = Arrays.asList(detailImgArray); */
-
         // JSON 문자열을 List로 변환
-        List<String> detailImgList = new ArrayList<>();
         String detailImgJson = itemDTL.getDetailImg();
-
-        // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
-        // TypeReference:         JSON 문자열 -> List<String>으로
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            detailImgList = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<String> detailImgList = itemDTLService.convertJsonToList(detailImgJson);
 
         model.addAttribute("itemDTL", itemDTL);
         model.addAttribute("detailImgList",detailImgList);
@@ -101,17 +88,8 @@ public class ItemDTLController {
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
         // JSON 문자열을 List로 변환
-        List<String> detailImgList = new ArrayList<>();
         String detailImgJson = itemDTL.getDetailImg();
-
-        // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
-        // TypeReference:         JSON 문자열 -> List<String>으로
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            detailImgList = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<String> detailImgList = itemDTLService.convertJsonToList(detailImgJson);
 
         model.addAttribute("itemDTL",itemDTL);
         model.addAttribute("getSection", getSection);
@@ -134,42 +112,14 @@ public class ItemDTLController {
         System.out.println("itemDTL.getItemDtlId() = " + itemDTL.getItemDtlId());
         System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
 
-        // 1-1. 파일 Update 유무 확인
-        // 1-2. 있으면 S3 업로드 하고 or 없으면 기존 url 정보 가져와서
-        // 1-3. Url 객체 생성
-        String thumbnailUrl;
-        if (thumbnailFile != null && !thumbnailFile.isEmpty()) {
-            thumbnailUrl = imgUploadService.upload(thumbnailFile);
-        } else {
-            thumbnailUrl = itemDTL.getThumbnail();
-        }
-
-        List<String> detailImgUrls = new ArrayList<>();
-        if (detailImgsFile != null && detailImgsFile.length > 0) {
-            for (MultipartFile detailImg : detailImgsFile) {
-                detailImgUrls.add(imgUploadService.upload(detailImg));
-            }
-        } else {
-            detailImgUrls.addAll(parseDetailImgUrls(itemDTL.getDetailImg()));
-        }
-
-        String colorImgUrl;
-        if (colorImgFile != null && !colorImgFile.isEmpty()) {
-            colorImgUrl = imgUploadService.upload(colorImgFile);
-        } else {
-            colorImgUrl = itemDTL.getColorImg();
-        }
+        // 1. 파일 업로드 및 URL 생성
+        String thumbnailUrl = itemDTLService.getFileUrl(thumbnailFile, itemDTL.getThumbnail());
+        List<String> detailImgUrls = itemDTLService.getDetailImgUrls(detailImgsFile, itemDTL.getDetailImg());
+        String colorImgUrl = itemDTLService.getFileUrl(colorImgFile, itemDTL.getColorImg());
 
         // 2. detailImgUrls 리스트를 JSON 배열 형식으로 변환
-        String detailImgUrlsJson;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            detailImgUrlsJson = mapper.writeValueAsString(detailImgUrls);
-            System.out.println("detailImgUrlsJson = " + detailImgUrlsJson);
-        } catch (Exception e) {
-            e.printStackTrace();
-            detailImgUrlsJson = "[]";
-        }
+        String detailImgUrlsJson = itemDTLService.convertListToJson(detailImgUrls);
+
 
         // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
         itemDTL.setThumbnail(thumbnailUrl);
@@ -193,22 +143,6 @@ public class ItemDTLController {
         }
 
     }
-
-    private List<String> parseDetailImgUrls(String detailImgJson) {
-        List<String> detailImgUrls = new ArrayList<>();
-        if(detailImgJson != null && !detailImgJson.isEmpty()) {
-            try {
-                // ObjectMapper 클래스:    JSON 문자열 -> Java 객체로
-                // TypeReference:         JSON 문자열 -> List<String>으로
-                ObjectMapper mapper = new ObjectMapper();
-                detailImgUrls = mapper.readValue(detailImgJson, new TypeReference<List<String>>() {});
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return detailImgUrls;
-    }
-
 
 
     @RequestMapping(value = "writeFormItemDTL")
@@ -261,15 +195,7 @@ public class ItemDTLController {
         String colorImgUrl = imgUploadService.upload(colorImgFile);
 
         // 2. detailImgUrls 리스트를 JSON 배열 형식으로 변환
-        String detailImgUrlsJson;
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            detailImgUrlsJson = mapper.writeValueAsString(detailImgUrls);
-            System.out.println("detailImgUrlsJson = " + detailImgUrlsJson);
-        } catch (Exception e) {
-            e.printStackTrace();
-            detailImgUrlsJson = "[]";
-        }
+        String detailImgUrlsJson = itemDTLService.convertListToJson(detailImgUrls);
 
         // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
         itemDTL.setThumbnail(thumbnailUrl);

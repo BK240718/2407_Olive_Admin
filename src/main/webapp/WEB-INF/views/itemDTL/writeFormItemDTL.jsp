@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ include file="/WEB-INF/views/common/sidebar.jsp" %>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,8 @@
       <title>Insert title here</title>
    </head>
    <body>
+
+
       <main class="main-content-wrapper">
       				<div class="container">
       					<div class="row mb-8">
@@ -113,7 +116,7 @@
                                                             Quantity
                                                             <span class="text-danger">*</span>
                                                         </label>
-                                                        <input type="number" class="form-control" name="quantity" id="creatCustomerEmail" placeholder="Quantity" min="0" required />
+                                                        <input type="number" class="form-control" name="itemDtlQty" id="creatCustomerEmail" placeholder="Quantity" min="0" required />
                                                         <div class="invalid-feedback">Please enter quantity</div>
                                                     </div>
                                                 </div>

@@ -95,7 +95,7 @@
                                       </td>
                                       <td>${itemDTL.itemName}</td>
                                       <td><a href="detailItemDTL?itemDtlId=${itemDTL.itemDtlId}" class="text-reset">${itemDTL.colorName}</a></td>
-                                      <td>${itemDTL.quantity}</td>
+                                      <td>${itemDTL.itemDtlQty}</td>
                                       <td><fmt:formatNumber type="currency" currencySymbol="₩" value="${itemDTL.salesPrice}"/></td>
 
                                       <td>

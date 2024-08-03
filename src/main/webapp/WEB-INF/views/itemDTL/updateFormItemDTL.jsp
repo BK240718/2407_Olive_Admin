@@ -115,7 +115,7 @@
                                                             Quantity
                                                             <span class="text-danger">*</span>
                                                         </label>
-                                                        <input type="number" class="form-control" name="quantity" id="creatCustomerEmail" value="${itemDTL.quantity}" min="0" required />
+                                                        <input type="number" class="form-control" name="itemDtlQty" id="creatCustomerEmail" value="${itemDTL.itemDtlQty}" min="0" required />
                                                         <div class="invalid-feedback">Please enter quantity</div>
                                                     </div>
                                                 </div>

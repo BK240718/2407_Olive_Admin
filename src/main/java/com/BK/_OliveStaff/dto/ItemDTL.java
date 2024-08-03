@@ -16,7 +16,7 @@ public class ItemDTL {
     private String colorName;
     private int purchasePrice;
     private int salesPrice;
-    private int quantity;
+    private int itemDtlQty;
     private String regDate;
     private int status;
     private String thumbnail;
