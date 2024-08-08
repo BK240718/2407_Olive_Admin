@@ -78,8 +78,6 @@ public class ItemDTLController {
                                     Model model) {
 
         System.out.println("ItemDTLController detailItemDTL Start");
-        Section section  = null;
-        Staff staff = null;
 
         List<Section> getSection = sectionService.getSection();
         List<Staff> getIdNameStaff = staffService.getIdNameStaff();
@@ -87,14 +85,20 @@ public class ItemDTLController {
 
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
+
         // JSON 문자열을 List로 변환
+        String thumbnailImgJson = itemDTL.getThumbnail();
         String detailImgJson = itemDTL.getDetailImg();
+
+        List<String> thumbnailImgList = itemDTLService.convertJsonToList(thumbnailImgJson);
         List<String> detailImgList = itemDTLService.convertJsonToList(detailImgJson);
+
 
         model.addAttribute("itemDTL",itemDTL);
         model.addAttribute("getSection", getSection);
         model.addAttribute("getIdNameStaff", getIdNameStaff);
         model.addAttribute("getItem", getItem);
+        model.addAttribute("thumbnailImgList",thumbnailImgList);
         model.addAttribute("detailImgList",detailImgList);
 
         return "itemDTL/updateFormItemDTL";
@@ -103,9 +107,9 @@ public class ItemDTLController {
 
     @PostMapping(value = "updateItemDTL")
     public String updateItemDTL(@ModelAttribute ItemDTL itemDTL,
-                                @RequestParam(value = "thumbnailFile", required = false) MultipartFile thumbnailFile,
-                                @RequestParam(value = "detailImgFile", required = false) MultipartFile[] detailImgsFile,
                                 @RequestParam(value = "colorImgFile", required = false) MultipartFile colorImgFile,
+                                @RequestParam(value = "thumbnailFile", required = false) MultipartFile[] thumbnailsFile,
+                                @RequestParam(value = "detailImgFile", required = false) MultipartFile[] detailImgsFile,
                                 Model model) {
 
         System.out.println("ItemDTLController updateItemDTL Start");
@@ -113,16 +117,16 @@ public class ItemDTLController {
         System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
 
         // 1. 파일 업로드 및 URL 생성
-        String thumbnailUrl = itemDTLService.getFileUrl(thumbnailFile, itemDTL.getThumbnail());
-        List<String> detailImgUrls = itemDTLService.getDetailImgUrls(detailImgsFile, itemDTL.getDetailImg());
         String colorImgUrl = itemDTLService.getFileUrl(colorImgFile, itemDTL.getColorImg());
+        List<String> thumbnailUrls = itemDTLService.getImageUrlsFromJson(thumbnailsFile, itemDTL.getThumbnail());
+        List<String> detailImgUrls = itemDTLService.getImageUrlsFromJson(detailImgsFile, itemDTL.getDetailImg());
 
-        // 2. detailImgUrls 리스트를 JSON 배열 형식으로 변환
+        // 2. thumbnailUrls, detailImgUrls 리스트를 JSON 배열 형식으로 변환
+        String thumbnailImgUrlsJson = itemDTLService.convertListToJson(thumbnailUrls);
         String detailImgUrlsJson = itemDTLService.convertListToJson(detailImgUrls);
 
-
         // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
-        itemDTL.setThumbnail(thumbnailUrl);
+        itemDTL.setThumbnail(thumbnailImgUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setDetailImg(detailImgUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setColorImg(colorImgUrl);
 
@@ -149,8 +153,6 @@ public class ItemDTLController {
     public String writeFormItemDTL(Model model) {
 
         System.out.println("ItemDTLController writeFormItemDTL Start");
-        Section section  = null;
-        Staff staff = null;
 
         List<Section> getSection = sectionService.getSection();
         List<Staff> getIdNameStaff = staffService.getIdNameStaff();

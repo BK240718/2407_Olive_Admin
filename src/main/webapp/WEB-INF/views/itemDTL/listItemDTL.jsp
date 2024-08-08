@@ -91,7 +91,7 @@
                                          </div>
                                       </td>
                                       <td>
-                                         <a href="#!"><img src="${itemDTL.thumbnail}" alt="" class="icon-shape icon-md" /></a>
+                                         <a href="detailItemDTL?itemDtlId=${itemDTL.itemDtlId}"><img src="${itemDTL.colorImg}" alt="" class="icon-shape icon-md" /></a>
                                       </td>
                                       <td>${itemDTL.itemName}</td>
                                       <td><a href="detailItemDTL?itemDtlId=${itemDTL.itemDtlId}" class="text-reset">${itemDTL.colorName}</a></td>

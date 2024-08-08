@@ -25,7 +25,7 @@ public interface ItemDTLService {
 
     String getFileUrl(MultipartFile file, String existingUrl);
 
-    List<String> getDetailImgUrls(MultipartFile[] detailImgs, String existingJson);
+    List<String> getImageUrlsFromJson(MultipartFile[] imgFiles, String existingJson);
 
 
 }

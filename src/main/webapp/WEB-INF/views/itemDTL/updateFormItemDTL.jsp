@@ -32,18 +32,27 @@
       								<div class="card-body d-flex flex-column gap-8 p-7">
       								    <form action="updateItemDTL" method="post" name="updateItemDTLForm" class="row g-3 needs-validation" enctype="multipart/form-data" novalidate >
       								        <input type="hidden" name="itemDtlId" value="${itemDTL.itemDtlId}">
+      								        <input type="hidden" name="colorImg" value="${itemDTL.colorImg}">
       								        <input type="hidden" name="thumbnail" value="${itemDTL.thumbnail}">
       								        <input type="hidden" name="detailImg" value="${itemDTL.detailImg}">
-      								        <input type="hidden" name="colorImg" value="${itemDTL.colorImg}">
                                             <div class="d-flex flex-column flex-md-row align-items-center mb-4 file-input-wrapper gap-2">
                                                 <div class="row w-100">
                                                     <!-- Thumbnail -->
                                                     <div class="col-md-4 d-flex align-items-center justify-content-center">
                                                         <div>
-                                                            <img class="image avatar avatar-lg rounded-3" src="${itemDTL.thumbnail}" alt="Image" />
+                                                            <img class="image avatar avatar-lg rounded-3" src="${itemDTL.colorImg}" alt="Image" />
                                                         </div>
                                                         <div class="file-upload btn btn-light ms-md-4">
-                                                            <input type="file" class="file-input opacity-0" name="thumbnailFile"/>
+                                                            <input type="file" class="file-input opacity-0" name="colorImgFile" />
+                                                            Upload Color IMG
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                        <div>
+                                                            <img class="image avatar avatar-lg rounded-3" src="${thumbnailImgList[0]}" alt="Image" />
+                                                        </div>
+                                                        <div class="file-upload btn btn-light ms-md-4">
+                                                            <input type="file" class="file-input opacity-0" name="thumbnailFile" multiple/>
                                                             Upload Thumbnail
                                                         </div>
                                                     </div>
@@ -54,16 +63,6 @@
                                                         <div class="file-upload btn btn-light ms-md-4">
                                                             <input type="file" class="file-input opacity-0" name="detailImgFile" multiple />
                                                             Upload Detail IMG
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                                        <div>
-                                                            <img class="image avatar avatar-lg rounded-3" src="${itemDTL.colorImg}" alt="Image" />
-                                                        </div>
-
-                                                        <div class="file-upload btn btn-light ms-md-4">
-                                                            <input type="file" class="file-input opacity-0" name="colorImgFile" />
-                                                            Upload Color IMG
                                                         </div>
                                                     </div>
                                                 </div>

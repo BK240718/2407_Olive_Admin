@@ -91,7 +91,6 @@
                                                     <img src="${itemDTL.thumbnail}" alt="" />
                                                  </div>
                                               </div>
-
                                               <c:forEach var="detailImg" items="${detailImgList}">
                                                   <div>
                                                      <div class="zoom" onmousemove="zoom(event)" style="background-image: url(${detailImg})">
@@ -101,7 +100,6 @@
                                                   </div>
                                               </c:forEach>
                                            </div>
-
                                            <div class="slider slider-nav mt-4">
                                               <div>
                                                  <img src="${itemDTL.thumbnail}" alt="" class="w-100 rounded" />

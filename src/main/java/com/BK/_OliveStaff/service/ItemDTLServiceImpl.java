@@ -49,13 +49,7 @@ public class ItemDTLServiceImpl implements ItemDTLService {
     public ItemDTL detailItemDTL(int itemDtlId) {
 
         System.out.println("ItemDTLServiceImpl detailItemDTL Start");
-
-        ItemDTL itemDTL = null;
-        itemDTL = itemDTLDao.detailItemDTL(itemDtlId);
-
-        if (itemDTL != null) {
-
-        }
+        ItemDTL itemDTL = itemDTLDao.detailItemDTL(itemDtlId);
 
         return itemDTL;
     }
@@ -175,20 +169,20 @@ public class ItemDTLServiceImpl implements ItemDTLService {
     }
 
     @Override
-    public List<String> getDetailImgUrls(MultipartFile[] detailImgs, String existingJson) {
+    public List<String> getImageUrlsFromJson(MultipartFile[] imgFiles, String existingJson) {
 
         System.out.println("ItemDTLServiceImpl getDetailImgUrls Start");
 
-        List<String> detailImgUrls = new ArrayList<>();
+        List<String> ImgUrls = new ArrayList<>();
 
-        if (detailImgs != null && detailImgs.length > 0) {
-            for (MultipartFile detailImg : detailImgs) {
-                detailImgUrls.add(imgUploadService.upload(detailImg));
+        if (imgFiles != null && imgFiles.length > 0) {
+            for (MultipartFile detailImg : imgFiles) {
+                ImgUrls.add(imgUploadService.upload(detailImg));
             }
         } else {
-            detailImgUrls.addAll(convertJsonToList(existingJson));
+            ImgUrls.addAll(convertJsonToList(existingJson));
         }
-        return detailImgUrls;
+        return ImgUrls;
     }
 
     private boolean deleteImgFromJson(String jsonUrls) {
