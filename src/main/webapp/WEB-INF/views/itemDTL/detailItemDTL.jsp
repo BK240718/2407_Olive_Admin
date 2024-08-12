@@ -85,28 +85,28 @@
                                         <div class="col-md-5 col-xl-6">
                                            <div class="slider slider-for">
                                               <div>
-                                                 <div class="zoom" onmousemove="zoom(event)" style="background-image: url(${itemDTL.thumbnail})">
+                                                 <div class="zoom" onmousemove="zoom(event)" style="background-image: url(${itemDTL.colorImg})">
                                                     <!-- img -->
                                                     <!-- img -->
-                                                    <img src="${itemDTL.thumbnail}" alt="" />
+                                                    <img src="${itemDTL.colorImg}" alt="" />
                                                  </div>
                                               </div>
-                                              <c:forEach var="detailImg" items="${detailImgList}">
+                                              <c:forEach var="thumbnail" items="${thumbnailList}">
                                                   <div>
-                                                     <div class="zoom" onmousemove="zoom(event)" style="background-image: url(${detailImg})">
+                                                     <div class="zoom" onmousemove="zoom(event)" style="background-image: url(${thumbnail})">
                                                         <!-- img -->
-                                                        <img src="${detailImg}" alt="" />
+                                                        <img src="${thumbnail}" alt="" />
                                                      </div>
                                                   </div>
                                               </c:forEach>
                                            </div>
                                            <div class="slider slider-nav mt-4">
                                               <div>
-                                                 <img src="${itemDTL.thumbnail}" alt="" class="w-100 rounded" />
+                                                 <img src="${itemDTL.colorImg}" alt="" class="w-100 rounded" />
                                               </div>
-                                              <c:forEach var="detailImg" items="${detailImgList}">
+                                              <c:forEach var="thumbnail" items="${thumbnailList}">
                                                   <div>
-                                                     <img src="${detailImg}" alt="" class="w-100 rounded" />
+                                                     <img src="${thumbnail}" alt="" class="w-100 rounded" />
                                                   </div>
                                               </c:forEach>
                                            </div>
@@ -167,8 +167,47 @@
                                      </div>
                                   </div>
                                </section>
+                                 <section class="mt-lg-14 mt-8">
+                                    <div class="container">
+                                       <div class="row">
+                                          <div class="col-md-12">
+                                             <ul class="nav nav-pills nav-lb-tab" id="myTab" role="tablist">
+                                                <!-- nav item -->
+                                                <li class="nav-item" role="presentation">
+                                                   <!-- btn -->
+                                                   <button
+                                                      class="nav-link active"
+                                                      id="product-tab"
+                                                      data-bs-toggle="tab"
+                                                      data-bs-target="#product-tab-pane"
+                                                      type="button"
+                                                      role="tab"
+                                                      aria-controls="product-tab-pane"
+                                                      aria-selected="true">
+                                                      Product Details
+                                                   </button>
+                                                </li>
+                                             </ul>
+                                             <!-- tab content -->
+                                             <div class="tab-content" id="myTabContent">
+                                                <!-- tab pane -->
+                                                <div class="tab-pane fade show active" id="product-tab-pane" role="tabpanel" aria-labelledby="product-tab" tabindex="0">
+                                                   <div class="my-8">
+                                                      <div class="mb-5">
+                                                          <c:forEach var="detailImg" items="${detailImgList}">
+                                                              <div>
+                                                                 <img src="${detailImg}" alt="detailImg" class="w-100 rounded" />
+                                                              </div>
+                                                          </c:forEach>
+                                                      </div>
+                                                   </div>
+                                                </div>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 </section>
                            </div>
-
                         </div>
                      </div>
                   </div>

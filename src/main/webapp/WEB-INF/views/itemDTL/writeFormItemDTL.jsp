@@ -41,31 +41,27 @@
                                                         <div>
                                                             <img class="image avatar avatar-lg rounded-3" src="../assets/images/docs/placeholder-img.jpg" alt="Image" />
                                                         </div>
-
-                                                        <div class="file-upload btn btn-light ms-md-4">
-                                                            <input type="file" class="file-input opacity-0" name="thumbnailFile"/>
-                                                            Upload Thumbnail
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                                        <div>
-                                                            <img class="image avatar avatar-lg rounded-3" src="../assets/images/docs/placeholder-img.jpg" alt="Image" />
-                                                        </div>
-
-                                                        <div class="file-upload btn btn-light ms-md-4">
-                                                            <input type="file" class="file-input opacity-0" name="detailImgFile" multiple />
-                                                            Upload Detail IMG
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
-                                                        <div>
-                                                            <img class="image avatar avatar-lg rounded-3" src="../assets/images/docs/placeholder-img.jpg" alt="Image" />
-                                                        </div>
-
                                                         <div class="file-upload btn btn-light ms-md-4">
                                                             <input type="file" class="file-input opacity-0" name="colorImgFile" />
                                                             Upload Color IMG
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                        <div>
+                                                            <img class="image avatar avatar-lg rounded-3" src="../assets/images/docs/placeholder-img.jpg" alt="Image" />
+                                                        </div>
+                                                        <div class="file-upload btn btn-light ms-md-4">
+                                                            <input type="file" class="file-input opacity-0" name="thumbnailFile" multiple/>
+                                                            Upload Thumbnail
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 d-flex align-items-center justify-content-center">
+                                                        <div>
+                                                            <img class="image avatar avatar-lg rounded-3" src="../assets/images/docs/placeholder-img.jpg" alt="Image" />
+                                                        </div>
+                                                        <div class="file-upload btn btn-light ms-md-4">
+                                                            <input type="file" class="file-input opacity-0" name="detailImgFile" multiple />
+                                                            Upload Detail IMG
                                                         </div>
                                                     </div>
                                                 </div>

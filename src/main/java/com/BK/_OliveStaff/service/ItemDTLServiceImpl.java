@@ -25,8 +25,7 @@ public class ItemDTLServiceImpl implements ItemDTLService {
 
         System.out.println("ItemDTLServiceImpl listItemDTL Start");
 
-        List<ItemDTL> itemDTLList = null;
-        itemDTLList = itemDTLDao.listItemDTL(itemDTL);
+        List<ItemDTL> itemDTLList = itemDTLDao.listItemDTL(itemDTL);
         System.out.println("itemDTLList.size() = " + itemDTLList.size());
 
         return itemDTLList;
@@ -88,17 +87,15 @@ public class ItemDTLServiceImpl implements ItemDTLService {
             throw new RuntimeException("Item detail not found for ID: "+itemDtlId);
         }
 
-        System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
         System.out.println("itemDTL.getColorImg() = " + itemDTL.getColorImg());
 
-
         // 2. 이미지 url 삭제
-        boolean deleteThumbnail =   imgUploadService.deteleImg(itemDTL.getThumbnail());
         boolean deleteColorImg  =   imgUploadService.deteleImg(itemDTL.getColorImg());
+        boolean deleteThumbnail =   deleteImgFromJson(itemDTL.getThumbnail());
         boolean deleteDetailImg =   deleteImgFromJson(itemDTL.getDetailImg());
 
-        System.out.println("deleteThumbnail = " + deleteThumbnail);
         System.out.println("deleteColorImg = " + deleteColorImg);
+        System.out.println("deleteThumbnail = " + deleteThumbnail);
         System.out.println("deleteDetailImg = " + deleteDetailImg);
 
 
@@ -205,8 +202,4 @@ public class ItemDTLServiceImpl implements ItemDTLService {
         }
         return true;
     }
-
-
-
-
 }

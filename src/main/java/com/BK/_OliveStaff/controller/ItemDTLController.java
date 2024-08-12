@@ -63,10 +63,13 @@ public class ItemDTLController {
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
         // JSON 문자열을 List로 변환
+        String thumbnailJson = itemDTL.getThumbnail();
+        List<String> thumbnailList = itemDTLService.convertJsonToList(thumbnailJson);
         String detailImgJson = itemDTL.getDetailImg();
         List<String> detailImgList = itemDTLService.convertJsonToList(detailImgJson);
 
         model.addAttribute("itemDTL", itemDTL);
+        model.addAttribute("thumbnailList",thumbnailList);
         model.addAttribute("detailImgList",detailImgList);
 
         return "itemDTL/detailItemDTL";
@@ -181,7 +184,7 @@ public class ItemDTLController {
 
     @PostMapping(value = "writeItemDTL")
     public String writeItemDTL(@ModelAttribute ItemDTL itemDTL,
-                               @RequestParam("thumbnailFile") MultipartFile thumbnailFile,
+                               @RequestParam("thumbnailFile") MultipartFile[] thumbnailsFile,
                                @RequestParam("detailImgFile") MultipartFile[] detailImgsFile,
                                @RequestParam("colorImgFile") MultipartFile colorImgFile,
                                Model model) {
@@ -189,18 +192,22 @@ public class ItemDTLController {
         System.out.println("ItemDTLController writeItemDTL Start");
 
         // 1. 이미지 업로드
-        String thumbnailUrl = imgUploadService.upload(thumbnailFile);
+        String colorImgUrl = imgUploadService.upload(colorImgFile);
+        List<String> thumbnailUrls = new ArrayList<>();
+        for (MultipartFile thumbnail : thumbnailsFile) {
+            thumbnailUrls.add(imgUploadService.upload(thumbnail));
+        }
         List<String> detailImgUrls = new ArrayList<>();
         for (MultipartFile detailImg : detailImgsFile) {
             detailImgUrls.add(imgUploadService.upload(detailImg));
         }
-        String colorImgUrl = imgUploadService.upload(colorImgFile);
 
-        // 2. detailImgUrls 리스트를 JSON 배열 형식으로 변환
+        // 2. thumbnailUrls, detailImgUrls 리스트를 JSON 배열 형식으로 변환
+        String thumbnailUrlsJson = itemDTLService.convertListToJson(thumbnailUrls);
         String detailImgUrlsJson = itemDTLService.convertListToJson(detailImgUrls);
 
         // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
-        itemDTL.setThumbnail(thumbnailUrl);
+        itemDTL.setThumbnail(thumbnailUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setDetailImg(detailImgUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setColorImg(colorImgUrl);
 
@@ -226,6 +233,7 @@ public class ItemDTLController {
         System.out.println("ItemDTLController deleteItemDTL Start");
 
         int deleteResult = itemDTLService.deleteItemDTL(itemDtlId);
+        System.out.println("deleteResult = " + deleteResult);
 
         return "redirect:listItemDTL";
     }
