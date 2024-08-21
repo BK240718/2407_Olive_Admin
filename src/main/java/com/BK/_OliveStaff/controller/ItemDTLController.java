@@ -31,7 +31,7 @@ public class ItemDTLController {
                               @RequestParam(value = "currentPage", required = false) String currentPage,
                               Model model) {
 
-        System.out.println("ItemDTLController listItemDTL Start");
+        log.info("ItemDTLController listItemDTL Start");
 
         // 1. ItemDTL 전체 Cnt
         int totalItemDTL = itemDTLService.totalItemDTL();
@@ -44,7 +44,7 @@ public class ItemDTLController {
 
         // 3. Select List
         List<ItemDTL> listItemDTL = itemDTLService.listItemDTL(itemDTL);
-        System.out.println("ItemDTLController listItemDTL listItemDTL.size() = " + listItemDTL.size());
+        log.info("ItemDTLController listItemDTL listItemDTL.size() = {}", listItemDTL.size());
 
         model.addAttribute("totalItemDTL",totalItemDTL);
         model.addAttribute("listItemDTL",listItemDTL);
@@ -58,7 +58,7 @@ public class ItemDTLController {
     public String detailItemDTL(@RequestParam("itemDtlId") int itemDtlId,
                                 Model model) {
 
-        System.out.println("ItemDTLController detailItemDTL Start");
+        log.info("ItemDTLController detailItemDTL Start");
 
         ItemDTL itemDTL = itemDTLService.detailItemDTL(itemDtlId);
 
@@ -80,7 +80,7 @@ public class ItemDTLController {
     public String updateFormItemDTL(@RequestParam("itemDtlId") int itemDtlId,
                                     Model model) {
 
-        System.out.println("ItemDTLController detailItemDTL Start");
+        log.info("ItemDTLController updateFormItemDTL Start");
 
         List<Section> getSection = sectionService.getSection();
         List<Staff> getIdNameStaff = staffService.getIdNameStaff();
@@ -115,9 +115,9 @@ public class ItemDTLController {
                                 @RequestParam(value = "detailImgFile", required = false) MultipartFile[] detailImgsFile,
                                 Model model) {
 
-        System.out.println("ItemDTLController updateItemDTL Start");
-        System.out.println("itemDTL.getItemDtlId() = " + itemDTL.getItemDtlId());
-        System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
+        log.info("ItemDTLController updateItemDTL Start");
+        log.info("itemDTL.getItemDtlId() = {}", itemDTL.getItemDtlId());
+        log.info("updateItemDTL itemDTL.getThumbnail() = {}", itemDTL.getThumbnail());
 
         // 1. 파일 업로드 및 URL 생성
         String colorImgUrl = itemDTLService.getFileUrl(colorImgFile, itemDTL.getColorImg());
@@ -155,7 +155,7 @@ public class ItemDTLController {
     @RequestMapping(value = "writeFormItemDTL")
     public String writeFormItemDTL(Model model) {
 
-        System.out.println("ItemDTLController writeFormItemDTL Start");
+        log.info("ItemDTLController writeFormItemDTL Start");
 
         List<Section> getSection = sectionService.getSection();
         List<Staff> getIdNameStaff = staffService.getIdNameStaff();
@@ -171,7 +171,7 @@ public class ItemDTLController {
     @RequestMapping(value = "getItemAjax", method = RequestMethod.GET)
     public Map<String, Object> getItem(@RequestParam("sectionId") int sectionId) {
 
-        System.out.println("ItemDTLController getItem Start");
+        log.info("ItemDTLController getItem Start");
 
         Map<String, Object> reseponse = new HashMap<String, Object>();
         List<Item> items = itemService.getItem(sectionId);
@@ -189,7 +189,7 @@ public class ItemDTLController {
                                @RequestParam("colorImgFile") MultipartFile colorImgFile,
                                Model model) {
 
-        System.out.println("ItemDTLController writeItemDTL Start");
+        log.info("ItemDTLController writeItemDTL Start");
 
         // 1. 이미지 업로드
         String colorImgUrl = imgUploadService.upload(colorImgFile);
@@ -206,14 +206,14 @@ public class ItemDTLController {
         String thumbnailUrlsJson = itemDTLService.convertListToJson(thumbnailUrls);
         String detailImgUrlsJson = itemDTLService.convertListToJson(detailImgUrls);
 
-        // 3. 업로드 된 이미지 URL 을 객체 ItemDTL에 저장
+        // 3. 업로드 된 이미지 URL 을 객체 ItemDTL 에 저장
         itemDTL.setThumbnail(thumbnailUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setDetailImg(detailImgUrlsJson);    // JSON 배열 형식으로 저장
         itemDTL.setColorImg(colorImgUrl);
 
-        System.out.println("itemDTL.getThumbnail() = " + itemDTL.getThumbnail());
-        System.out.println("itemDTL.getDetailImg() = " + itemDTL.getDetailImg());
-        System.out.println("itemDTL.getColorImg() = " + itemDTL.getColorImg());
+        log.info("itemDTL.getThumbnail() = {}", itemDTL.getThumbnail());
+        log.info("itemDTL.getDetailImg() = {}", itemDTL.getDetailImg());
+        log.info("itemDTL.getColorImg() = {}", itemDTL.getColorImg());
 
         // 4. ItemDTL Insert 작업
         int insertResult = itemDTLService.insertItemDTL(itemDTL);
@@ -230,10 +230,10 @@ public class ItemDTLController {
     @RequestMapping(value = "deleteItemDTL")
     public String deleteItemDTL(@RequestParam("itemDtlId") int itemDtlId,
                                 Model model) {
-        System.out.println("ItemDTLController deleteItemDTL Start");
+        log.info("ItemDTLController deleteItemDTL Start");
 
         int deleteResult = itemDTLService.deleteItemDTL(itemDtlId);
-        System.out.println("deleteResult = " + deleteResult);
+        log.info("deleteResult = {}", deleteResult);
 
         return "redirect:listItemDTL";
     }

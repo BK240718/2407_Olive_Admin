@@ -26,7 +26,8 @@ public class SectionController {
                               @RequestParam(value = "currentPage", required = false) String currentPage,
                               Model model) {
 
-        System.out.println("SectionController listSection Start");
+
+        log.info("SectionController listSection Start");
 
         // 1. Section 전체 Cnt
         int totalSection = sectionService.totalSection();
@@ -38,14 +39,13 @@ public class SectionController {
         section.setEnd(page.getEnd());      // 시작 시 10
 
         List<Section> listSection = sectionService.listSection(section);
-        System.out.println("SectionController sectionList listSection.size()) ="+listSection.size());
-        System.out.println("page.getStartPage = " + page.getStartPage());
-        System.out.println("currentPage = "+currentPage);
+        log.info("SectionController sectionList listSection.size()) = {}", listSection.size());
+        log.info("page.getStartPage = {}", page.getStartPage());
+        log.info("currentPage = {}", currentPage);
 
         model.addAttribute("totalSection", totalSection);
         model.addAttribute("listSection", listSection);
         model.addAttribute("page",page);
-
 
         return "section/categories";
     }
@@ -55,8 +55,8 @@ public class SectionController {
     public String detailSection(@RequestParam("sectionId") int sectionId,
                                 Model model) {
 
-        System.out.println("SectionController detailSection Start");
-        System.out.println("sectionId = " + sectionId);
+        log.info("SectionController detailSection Start");
+        log.info("detailSection sectionId = {}", sectionId);
 
         Section section = sectionService.detailSection(sectionId);
 
@@ -70,8 +70,8 @@ public class SectionController {
     public String updateFormSection(@RequestParam("sectionId") int sectionId,
                                     Model model) {
 
-        System.out.println("SectionController updateFormSection Start");
-        System.out.println("sectionId = " + sectionId);
+        log.info("SectionController updateFormSection Start");
+        log.info("updateFormSection sectionId = {}", sectionId);
 
         Section section = sectionService.detailSection(sectionId);
 
@@ -85,11 +85,11 @@ public class SectionController {
     public String updateSection(Section section, Model model) {
 
         log.info("SectionController updateSection Start");
-        System.out.println("section.getSectionId() = " + section.getSectionId());
-        System.out.println("section.getSecName() = " + section.getSecName());
+        log.info("section.getSectionId() = {}", section.getSectionId());
+        log.info("section.getSecName() = {}", section.getSecName());
 
         int updateCount = sectionService.updateSection(section);
-        System.out.println("updateCount = " + updateCount);
+        log.info("updateCount = {}", updateCount);
 
         return "forward:listSection";
     }
@@ -97,7 +97,8 @@ public class SectionController {
 
     @RequestMapping(value = "writeFormSection")
     public String writeFormSection(Model model) {
-        System.out.println("SectionController writeFormSection Start");
+
+        log.info("SectionController writeFormSection Start");
 
         return "section/writeFormSection";
     }
@@ -106,8 +107,8 @@ public class SectionController {
     @PostMapping(value = "writeSection")
     public String writeSection(Section section, Model model) {
 
-        System.out.println("SectionController writeFormSection Start");
-        System.out.println("section.getSecName() = " + section.getSecName());
+        log.info("SectionController writeSection Start");
+        log.info("writeSection section.getSecName() = {}", section.getSecName());
 
         int insertResult = sectionService.insertSection(section);
         if (insertResult > 0) return "redirect:listSection";
@@ -123,7 +124,7 @@ public class SectionController {
     public String deleteSection(@RequestParam("sectionId") int sectionId,
                                 Model model) {
 
-        System.out.println("SectionController deleteSection Start");
+        log.info("SectionController deleteSection Start");
 
         int result = sectionService.deleteSection(sectionId);
 

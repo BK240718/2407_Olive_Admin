@@ -77,6 +77,7 @@ public class ImgUploadServiceImpl implements ImgUploadService {
         return false;
     }
 
+    // 한글명 파일 디코딩용
     private String extractFileNameFromUrl(String url) {
 
         // URL에서 파일명 추출

@@ -248,8 +248,8 @@
 
     function addItemForm() {
         window.open(
-            '/showAddItemForm',
-            'addItemForm',
+            '/showAddItemForm',     // 컨트롤러명
+            'addItemForm',          // 창 이름
             'width=600,height=500,scrollbars=yes,resizable=yes'
         );
     }

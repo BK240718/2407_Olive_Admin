@@ -19,8 +19,11 @@ public class StaffController {
 
 
     @RequestMapping(value = "listStaff")
-    public String staffList(Staff staff, @RequestParam(value = "currentPage", required = false) String currentPage, Model model) {
-        System.out.println("StaffController Start");
+    public String staffList(Staff staff,
+                            @RequestParam(value = "currentPage", required = false)
+                            String currentPage, Model model) {
+
+        log.info("StaffController listStaff Start");
 
         // 1. Staff 전체 cnt
         int totalStaff = staffService.totalStaff();
