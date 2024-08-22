@@ -3,10 +3,12 @@ package com.BK._OliveStaff.service;
 import com.BK._OliveStaff.dao.StaffDao;
 import com.BK._OliveStaff.dto.Staff;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class StaffServiceImpl implements StaffService{
@@ -16,9 +18,10 @@ public class StaffServiceImpl implements StaffService{
     @Override
     public int totalStaff() {
 
-        System.out.println("StaffServiceImpl totalStaff Start");
+        log.info("StaffServiceImpl totalStaff Start");
+
         int totalStaffCnt = staffDao.totalStaff();
-        System.out.println("totStaffCnt = " + totalStaffCnt);
+        log.info("totStaffCnt = {}", totalStaffCnt);
 
         return totalStaffCnt;
     }
@@ -26,18 +29,19 @@ public class StaffServiceImpl implements StaffService{
     @Override
     public List<Staff> getIdNameStaff() {
 
-        System.out.println("StaffServiceImpl getIdNameStaff Start");
+        log.info("StaffServiceImpl getIdNameStaff Start");
         List<Staff> getIdNameStaff = null;
         
         getIdNameStaff = staffDao.getIdNameStaff();
-        System.out.println("getIdNameStaff.size() = " + getIdNameStaff.size());
+        log.info("getIdNameStaff.size() = {}", getIdNameStaff.size());
+
         return getIdNameStaff;
     }
 
     @Override
     public Staff selectStaffByLogin(Staff staffIdPw) {
 
-        System.out.println("StaffServiceImpl selectStaffByLogin Start");
+        log.info("StaffServiceImpl selectStaffByLogin Start");
 
         Staff staff = staffDao.selectStaffByLogin(staffIdPw);
 

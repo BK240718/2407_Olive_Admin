@@ -28,7 +28,7 @@ public class MainController {
     @RequestMapping(value = "/")
     public String home() {
 
-        System.out.println("MainController home Start");
+        log.info("MainController home Start");
 
         return "common/login";
     }
@@ -39,7 +39,7 @@ public class MainController {
                         HttpSession session,
                         Model model) {
 
-        System.out.println("MainController login Start");
+        log.info("MainController login Start");
 
         Staff staff = staffService.selectStaffByLogin(staffIdPw);
 
@@ -57,7 +57,8 @@ public class MainController {
     @RequestMapping(value = "list")
     public String list(Model model) {
 
-        System.out.println("MainController list Start");
+        log.info("MainController list Start");
+
         return "list";
     }
 
@@ -66,7 +67,7 @@ public class MainController {
     @RequestMapping(value = "mainSection", method = RequestMethod.POST)
     public Map<String, Object> mainSection() {
 
-        System.out.println("MainController mainSection Start");
+        log.info("MainController mainSection Start");
 
         Map<String, Object> response = new HashMap<String, Object>();
         List<Section> sectionList = sectionService.mainSection();

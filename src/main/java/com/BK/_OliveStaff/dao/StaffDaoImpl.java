@@ -2,11 +2,13 @@ package com.BK._OliveStaff.dao;
 
 import com.BK._OliveStaff.dto.Staff;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class StaffDaoImpl implements StaffDao{
@@ -19,15 +21,16 @@ public class StaffDaoImpl implements StaffDao{
     @Override
     public int totalStaff() {
 
-        System.out.println("StaffDaoImpl totalStaff Start");
+        log.info("StaffDaoImpl totalStaff Start");
         int totalStaffCnt = 0;
 
         try {
 
             totalStaffCnt = session.selectOne("staffTotal");
-            System.out.println("totStaffCnt = " + totalStaffCnt);
+            log.info("totStaffCnt = {}", totalStaffCnt);
         } catch (Exception e) {
-            System.out.println("StaffDaoImpl Exception = " + e.getMessage());
+            System.out.println();
+            log.info("StaffDaoImpl Exception = {}", e.getMessage());
         }
 
         return totalStaffCnt;
@@ -37,14 +40,14 @@ public class StaffDaoImpl implements StaffDao{
     @Override
     public List<Staff> getIdNameStaff() {
 
-        System.out.println("StaffDaoImpl totalStaff Start");
+        log.info("StaffDaoImpl getIdNameStaff Start");
         List<Staff> getIdNameStaff = null;
         
         try {
             getIdNameStaff = session.selectList("getIdNameStaff");
-            System.out.println("getIdNameStaff.size() = " + getIdNameStaff.size());
+            log.info("getIdNameStaff.size() = {}", getIdNameStaff.size());
         } catch (Exception e) {
-            System.out.println("e.getMessage() = " + e.getMessage());    
+            log.info("e.getMessage() = {}", e.getMessage());
         }
         
         return getIdNameStaff;
@@ -53,15 +56,14 @@ public class StaffDaoImpl implements StaffDao{
     @Override
     public Staff selectStaffByLogin(Staff staffIdPw) {
 
-        System.out.println("StaffDaoImpl selectStaffByLogin Start");
-
+        log.info("StaffDaoImpl selectStaffByLogin Start");
         Staff staff = null;
         
         try {
             staff = session.selectOne("selectStaffByLogin", staffIdPw);
-            System.out.println("staff = " + staff.getStaffId());
+            log.info("staff = {}", staff.getStaffId());
         } catch (Exception e) {
-            System.out.println("e.getMessage() = " + e.getMessage());
+            log.info("e.getMessage() = {}", e.getMessage());
         }
 
         return staff;
